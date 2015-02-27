@@ -1,5 +1,5 @@
 # Introduction to MIPS assembly programming using MARS
-# for MYY402 - Computer Architecture
+# for MYY402 - Computer Architecture
 # Aris Efthymiou
 # Department of Computer Engineering, University of Ioannina
 
@@ -9,7 +9,7 @@
         
         .text      # Special assembler direcrive. what follows is code
      
-main:   # Words ending with ':' are **labels**
+main:   # Words ending with ':' are labels
         # The convention is to write labels starting from the leftmost column.
         # "main" is a special label. Executions starts from here
         # Try to keep label names short so they are to the left of instructions
@@ -19,32 +19,33 @@ main:   # Words ending with ':' are **labels**
         #   (so that we can see the labels more clearly)
         # Instruction operands are indented a few spaces, so that the
         #    instruction type is more visible.
-      
-        la         $a0, mesg1        # get address of mesg1 into $a0
+ la $a0, ,matric
+ lw $v0, 0($a0)      
+        #la         $a0, mesg1        # get address of mesg1 into $a0
         # la is a pseudo-instruction. Notice that is gets converted to 2
         #   instructions after assemblying.
         #   Ignore this detail for now. We'll get back to this later
-        addiu      $v0, $zero, 4     # system service 4: print string
-        syscall                      #   located at address $a0
-		# This is a system call. We call the operating system
-		#   to display a string for us. Think of it as a special
-		#   subroutine.
+        #addiu      $v0, $zero, 4     # system service 4: print string
+        #syscall                      #   located at address $a0
+  # This is a system call. We call the operating system
+  #   to display a string for us. Think of it as a special
+  #   subroutine.
         
-        addiu      $v0, $zero, 5     # system service 5: read integer
-        syscall                      # integer returned in $v0
+        #addiu      $v0, $zero, 5     # system service 5: read integer
+        #syscall                      # integer returned in $v0
         
         add        $s1, $zero, $v0   # $s1 = (read value)
                                      # Note: this just moves the value to
                                      #   a different register
         
-        la         $t0, var1         # $t0 gets the **address** of var1
-                                     # Note: this is address **not** value of var1
+        la         $t0, var1         # $t0 gets the address of var1
+                                     # Note: this is address not value of var1
         lw         $s0, 0($t0)       # $s0 gets the value of var1
         add        $s0, $s0, $s1     # $s0 = var1 + $s1
         sw         $s0, 0($t0)       # var1 = var1 + (read value)
         
         la         $s2, array        # get address of array into $s2
-                                     # This is called the **base** of the array
+                                     # This is called the base of the array
         sw         $s0, 0xc($s2)     # Store $s0 to the 4th element of array
                                      # Note the use of offset (0xc = 12 = 3*4)
                                      # array[0]  - array + 0
@@ -69,11 +70,11 @@ exit:
         
 ###############################################################################
 
-        .data      # Special assembler **direcrive**. what follows is data
+        .data      # Special assembler direcrive. what follows is data
         # Usually data are declared before text. Try to follow that convention 
         #     in your other programs
         #  
-matric: .word 0    # This will be used by your submitted code
+matric: .word 2429    # This will be used by your submitted code
 
 mesg1:  .asciiz "Enter matriculation number: "
         # Data can have labels too, so we can refer to them
